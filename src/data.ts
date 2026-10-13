@@ -1,0 +1,88 @@
+import type { Project, Task } from './types'
+
+export const initialProjects: Project[] = [
+  {
+    id: 'p1',
+    name: 'Portfolio Website',
+    description: 'Personal portfolio and case studies for internship applications.',
+    progress: 78,
+    members: 2,
+    tasks: 12,
+    dueDate: '2026-10-30',
+  },
+  {
+    id: 'p2',
+    name: 'Mobile Banking UI',
+    description: 'Responsive banking dashboard concept with reusable components.',
+    progress: 54,
+    members: 4,
+    tasks: 18,
+    dueDate: '2026-11-12',
+  },
+  {
+    id: 'p3',
+    name: 'E-commerce Redesign',
+    description: 'Modern storefront experience focused on usability and conversion.',
+    progress: 36,
+    members: 3,
+    tasks: 21,
+    dueDate: '2026-11-25',
+  },
+]
+
+export const initialTasks: Task[] = [
+  {
+    id: 't1',
+    title: 'Design dashboard header',
+    project: 'Portfolio Website',
+    status: 'done',
+    priority: 'Medium',
+    dueDate: '2026-10-14',
+    assignee: 'You',
+  },
+  {
+    id: 't2',
+    title: 'Build reusable stat cards',
+    project: 'Portfolio Website',
+    status: 'progress',
+    priority: 'High',
+    dueDate: '2026-10-16',
+    assignee: 'You',
+  },
+  {
+    id: 't3',
+    title: 'Implement mobile navigation',
+    project: 'Portfolio Website',
+    status: 'todo',
+    priority: 'High',
+    dueDate: '2026-10-18',
+    assignee: 'You',
+  },
+  {
+    id: 't4',
+    title: 'Create transaction table',
+    project: 'Mobile Banking UI',
+    status: 'progress',
+    priority: 'Medium',
+    dueDate: '2026-10-20',
+    assignee: 'Maya',
+  },
+  {
+    id: 't5',
+    title: 'Prototype product filters',
+    project: 'E-commerce Redesign',
+    status: 'todo',
+    priority: 'Low',
+    dueDate: '2026-10-23',
+    assignee: 'Nimal',
+  },
+  {
+    id: 't6',
+    title: 'Accessibility review',
+    project: 'Mobile Banking UI',
+    status: 'done',
+    priority: 'High',
+    dueDate: '2026-10-12',
+    assignee: 'Alex',
+  },
+]
