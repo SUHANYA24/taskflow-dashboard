@@ -12,12 +12,14 @@ import { supabase } from './lib/supabase'
 
 import { getProjects } from './services/projectService'
 import { getTasks } from './services/taskService'
+import { getProfile } from './services/profileService'
 
 import Dashboard from './pages/Dashboard'
 import Kanban from './pages/Kanban'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import Projects from './pages/Projects'
+import Settings from './pages/Settings'
 import Tasks from './pages/Tasks'
 
 import type { Project, Task } from './types'
@@ -43,6 +45,12 @@ export default function App() {
 
   const [dataLoading, setDataLoading] =
     useState(false)
+
+  const [profileName, setProfileName] =
+    useState('')
+
+  const [profileEmail, setProfileEmail] =
+    useState('')
 
   useEffect(() => {
     document.documentElement.dataset.theme =
@@ -80,20 +88,31 @@ export default function App() {
       if (!session) {
         setProjects([])
         setTasks([])
+        setProfileName('')
+        setProfileEmail('')
         return
       }
 
       try {
         setDataLoading(true)
 
-        const [projectData, taskData] =
+        const [projectData, taskData, profile] =
           await Promise.all([
             getProjects(),
             getTasks(),
+            getProfile(),
           ])
 
         setProjects(projectData)
         setTasks(taskData)
+
+        setProfileName(
+          profile?.full_name ?? '',
+        )
+
+        setProfileEmail(
+          session.user.email ?? '',
+        )
       } catch (error) {
         console.error(
           'Failed to load app data:',
@@ -165,6 +184,8 @@ export default function App() {
                   (value) => !value,
                 )
               }
+              profileName={profileName}
+              profileEmail={profileEmail}
             />
           ) : (
             <Navigate
@@ -213,6 +234,19 @@ export default function App() {
             <Kanban
               tasks={tasks}
               setTasks={setTasks}
+            />
+          }
+        />
+
+        <Route
+          path="/settings"
+          element={
+            <Settings
+              profileName={profileName}
+              profileEmail={profileEmail}
+              onProfileUpdated={
+                setProfileName
+              }
             />
           }
         />
